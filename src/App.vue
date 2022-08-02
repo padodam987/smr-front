@@ -4,23 +4,57 @@
       <ion-menu content-id="main-content" type="overlay">
         <ion-content>
           <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
-  
-            <ion-menu-toggle auto-hide="false" v-for="(p, i) in appPages" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
-                <ion-icon slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
+            <ion-list-header>Alain Lepière</ion-list-header>
+            <ion-note>Atelier régimentaire</ion-note>
+
+            <ion-menu-toggle
+              auto-hide="false"
+              v-for="(p, i) in appPages"
+              :key="i"
+            >
+              <ion-item
+                @click="selectedIndex = i"
+                router-direction="root"
+                :router-link="p.url"
+                lines="none"
+                detail="false"
+                class="hydrated"
+                :class="{ selected: selectedIndex === i }"
+              >
+                <ion-icon
+                  slot="start"
+                  :ios="p.iosIcon"
+                  :md="p.mdIcon"
+                ></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
           </ion-list>
-  
-          <ion-list id="labels-list">
-            <ion-list-header>Labels</ion-list-header>
-  
-            <ion-item v-for="(label, index) in labels" lines="none" :key="index">
-              <ion-icon slot="start" :ios="bookmarkOutline" :md="bookmarkSharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
+
+          <ion-list id="buttons-list">
+        
+              <ion-button>
+                ACTIVER LA RÉALITÉ AUGMENTÉ
+                <ion-icon ios="ios-aperture" md="md-aperture" slot="start"></ion-icon>
+              </ion-button>
+              
+              <ion-button>
+                <ion-icon ios="ios-flash" md="md-flash" slot="start"></ion-icon>
+                CHARGER UN VÉHICULE
+              </ion-button>
+
+              <ion-button>
+                <ion-icon :icon="star" slot="start"></ion-icon>
+                ARRÊTER UNE CHARGE
+              </ion-button>
+    
+
+            <ion-item
+              v-for="(button, index) in buttons"
+              lines="none"
+              :key="index"
+            >
+              <ion-button>{{ button }}</ion-button>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -31,97 +65,130 @@
 </template>
 
 <script lang="ts">
-import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet, IonSplitPane } from '@ionic/vue';
-import { defineComponent, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import {
+  IonApp,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonButton,
+//  IonLabel,
+  IonList,
+  IonListHeader,
+  IonMenu,
+  IonMenuToggle,
+  IonNote,
+  IonRouterOutlet,
+  IonSplitPane,
+} from "@ionic/vue";
+import { defineComponent, ref } from "vue";
+import { useRoute } from "vue-router";
+import {
+  flash,
+  informationCircleOutline,
+  informationCircleSharp,
+  settingsOutline,
+  settingsSharp,
+  helpCircleOutline,
+  helpCircleSharp,
+  carOutline,
+  carSharp,
+  batteryChargingOutline,
+  batteryChargingSharp,
+  appsOutline,
+  appsSharp,
+} from "ionicons/icons";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    IonApp, 
-    IonContent, 
-    IonIcon, 
-    IonItem, 
-    IonLabel, 
-    IonList, 
-    IonListHeader, 
-    IonMenu, 
-    IonMenuToggle, 
-    IonNote, 
-    IonRouterOutlet, 
+    IonApp,
+    IonContent,
+    IonIcon,
+    IonItem,
+    IonButton,
+    IonList,
+    IonListHeader,
+    IonMenu,
+    IonMenuToggle,
+    IonNote,
+    IonRouterOutlet,
     IonSplitPane,
   },
   setup() {
     const selectedIndex = ref(0);
     const appPages = [
       {
-        title: 'Inbox',
-        url: '/folder/Inbox',
-        iosIcon: mailOutline,
-        mdIcon: mailSharp
+        title: "Tableau de bord",
+        url: "/folder/Dashboard",
+        iosIcon: appsOutline,
+        mdIcon: appsSharp,
       },
       {
-        title: 'Outbox',
-        url: '/folder/Outbox',
-        iosIcon: paperPlaneOutline,
-        mdIcon: paperPlaneSharp
+        title: "Mes chargeurs",
+        url: "/folder/Batteries",
+        iosIcon: batteryChargingOutline,
+        mdIcon: batteryChargingSharp,
       },
       {
-        title: 'Favorites',
-        url: '/folder/Favorites',
-        iosIcon: heartOutline,
-        mdIcon: heartSharp
+        title: "Mes véhicules",
+        url: "/folder/Vehicules",
+        iosIcon: carOutline,
+        mdIcon: carSharp,
       },
       {
-        title: 'Archived',
-        url: '/folder/Archived',
-        iosIcon: archiveOutline,
-        mdIcon: archiveSharp
+        title: "Aide en ligne",
+        url: "/folder/Help",
+        iosIcon: helpCircleOutline,
+        mdIcon: helpCircleSharp,
       },
       {
-        title: 'Trash',
-        url: '/folder/Trash',
-        iosIcon: trashOutline,
-        mdIcon: trashSharp
+        title: "Paramètres",
+        url: "/folder/Settings",
+        iosIcon: settingsOutline,
+        mdIcon: settingsSharp,
       },
       {
-        title: 'Spam',
-        url: '/folder/Spam',
-        iosIcon: warningOutline,
-        mdIcon: warningSharp
-      }
+        title: "À propos",
+        url: "/folder/Info",
+        iosIcon: informationCircleOutline,
+        mdIcon: informationCircleSharp,
+      },
     ];
-    const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-    
-    const path = window.location.pathname.split('folder/')[1];
+
+ //   const buttons = [
+ //     "ACTIVER LA RÉALITÉ AUGMENTÉ",
+ //     "CHARGER UN VÉHICULE",
+ //     "ARRÊTER UNE CHARGE",
+ //   ];
+
+    const path = window.location.pathname.split("folder/")[1];
     if (path !== undefined) {
-      selectedIndex.value = appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+      selectedIndex.value = appPages.findIndex(
+        (page) => page.title.toLowerCase() === path.toLowerCase()
+      );
     }
-    
+
     const route = useRoute();
-    
-    return { 
+
+    return {
       selectedIndex,
-      appPages, 
-      labels,
-      archiveOutline, 
-      archiveSharp, 
-      bookmarkOutline, 
-      bookmarkSharp, 
-      heartOutline, 
-      heartSharp, 
-      mailOutline, 
-      mailSharp, 
-      paperPlaneOutline, 
-      paperPlaneSharp, 
-      trashOutline, 
-      trashSharp, 
-      warningOutline, 
-      warningSharp,
-      isSelected: (url: string) => url === route.path ? 'selected' : ''
-    }
-  }
+      appPages,
+//      buttons,
+      appsOutline,
+      appsSharp,
+      batteryChargingOutline,
+      batteryChargingSharp,
+      carOutline,
+      carSharp,
+      helpCircleOutline,
+      helpCircleSharp,
+      settingsOutline,
+      settingsSharp,
+      informationCircleOutline,
+      informationCircleSharp,
+      isSelected: (url: string) => (url === route.path ? "selected" : ""),
+    };
+  },
 });
 </script>
 
