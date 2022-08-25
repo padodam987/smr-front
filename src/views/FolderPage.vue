@@ -11,12 +11,12 @@
     
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-    
-      <div id="container">
+              <ion-toolbar>
+                <ion-title size="large">{{ $route.params.id }}</ion-title>
+              </ion-toolbar>
+            </ion-header>
+      <open-layers-map v-if="$route.path.indexOf('Dashboard')!== -1"></open-layers-map>
+      <div v-else id="container">
         <strong class="capitalize">{{ $route.params.id }}</strong>
         <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
       </div>
@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import OpenLayersMap from '../components/map/OpenLayersMap.vue';
 
 export default defineComponent({
   name: 'FolderPage',
@@ -37,7 +38,8 @@ export default defineComponent({
     IonMenuButton,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    OpenLayersMap
   }
 });
 </script>

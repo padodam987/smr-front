@@ -7,6 +7,10 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/folder/Inbox'
   },
   {
+    path: '/map',
+    component: () => import ('../components/map/OpenLayersMap.vue')
+  },
+  {
     path: '/folder/:id',
     component: () => import ('../views/FolderPage.vue')
   }
