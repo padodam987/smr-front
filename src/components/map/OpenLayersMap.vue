@@ -1,5 +1,8 @@
 <template>
-  <div id="map" class="map"></div>
+  <div id="map" class="map">
+    <slot></slot>
+  </div>
+
 </template>
 
 <script>
@@ -9,6 +12,7 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import { useGeographic } from "ol/proj";
+import {FullScreen, defaults  as defaultControls} from "ol/control";
 import Point from "ol/geom/Point";
 import Feature from "ol/Feature";
 import VectorSource from "ol/source/Vector";
@@ -22,11 +26,13 @@ export default defineComponent({
     return {
       mainMap: null,
       initialCoordinates: [-47, -15],
+      initialZoom: 12,
     };
   },
   mounted() {
       useGeographic();
       this.mainMap = new Map({
+        controls: defaultControls().extend([new FullScreen()]),
         layers: [
           new TileLayer({
             source: new OSM(),
@@ -40,7 +46,7 @@ export default defineComponent({
         target: "map",
         view: new View({
           center: this.initialCoordinates,
-          zoom: 12,
+          zoom: this.initialZoom,
         }),
       });
       setTimeout(() => {
@@ -49,12 +55,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style>
-.map {
-  min-height: 100px;
-  height: 100%;
-  width: 100%;
-
-}
-</style>

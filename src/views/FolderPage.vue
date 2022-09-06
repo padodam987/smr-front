@@ -10,14 +10,12 @@
     </ion-header>
     
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-              <ion-toolbar>
-                <ion-title size="large">{{ $route.params.id }}</ion-title>
-              </ion-toolbar>
-            </ion-header>
-      <open-layers-map v-if="$route.path.indexOf('Dashboard')!== -1"></open-layers-map>
-      <div v-else id="container">
-        <strong class="capitalize">{{ $route.params.id }}</strong>
+
+      <div id="container">
+        <progress-bar pourcent="1" text="100%" color="green"></progress-bar>
+        <ion-button> - </ion-button>
+        <ion-button> + </ion-button>
+        <strong class="capitalize">{{ $route.params.id }} {{mapShown}}</strong>
         <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
       </div>
     </ion-content>
@@ -26,12 +24,32 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
 import OpenLayersMap from '../components/map/OpenLayersMap.vue';
+import ProgressBar from "@/components/figmaExtractions/progressBar.vue";
 
 export default defineComponent({
   name: 'FolderPage',
+  data(){
+    return{
+      mapShown: true,
+    }
+  },
+  mounted(){
+    console.log("Foldermounted");
+  },
+  watch:{
+    $route(newRoute){
+      console.log(newRoute.path.indexOf('Dashboard')!== -1)
+
+      this.mapShown =  newRoute.path.indexOf('Dashboard')!== -1
+    },
+    mapShown(newShown){
+      console.log('shown', newShown)
+    }
+  },
   components: {
+    ProgressBar,
     IonButtons,
     IonContent,
     IonHeader,
@@ -39,7 +57,7 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar,
-    OpenLayersMap
+    IonButton
   }
 });
 </script>

@@ -103,13 +103,6 @@ export default defineComponent({
     IonMenuToggle,
     IonNote,
   },
-  props: {
-    value: {
-      type: Array, default() {
-        return []
-      }
-    }
-  },
   data() {
     return {
       appPages: [

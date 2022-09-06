@@ -6,12 +6,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '',
     redirect: '/folder/Inbox'
   },
+  // {
+  //   path: '/folder/Dashboard',
+  //   name: 'Accueil',
+  //   component: () => import ('../views/DashBoardPage.vue')
+  // },
   {
-    path: '/map',
-    component: () => import ('../components/map/OpenLayersMap.vue')
-  },
-  {
-    path: '/folder/:id',
+    path: '/folder/Dashboard',
     component: () => import ('../views/FolderPage.vue')
   }
 ]
