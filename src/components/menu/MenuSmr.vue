@@ -40,7 +40,7 @@
           CHARGER UN VÉHICULE
         </ion-button>
 
-        <ion-button>
+        <ion-button id="stopCharge">
 <!--          <ion-icon :icon="star" slot="start"></ion-icon>-->
           ARRÊTER UNE CHARGE
         </ion-button>
@@ -156,6 +156,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+#stopCharge {
+  --background: var(--ion-color-button);
+}
+
+ion-button {
+  --background: #7FCBFF;
+}
+
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
@@ -187,17 +196,13 @@ ion-menu.md ion-list#inbox-list {
 ion-menu.md ion-list#inbox-list ion-list-header {
   font-size: 22px;
   font-weight: 600;
-
   min-height: 20px;
 }
 
 ion-menu.md ion-list#labels-list ion-list-header {
   font-size: 16px;
-
   margin-bottom: 18px;
-
   color: #757575;
-
   min-height: 26px;
 }
 
@@ -212,7 +217,7 @@ ion-menu.md ion-item.selected {
 }
 
 ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--ion-color-secondary);
 }
 
 ion-menu.md ion-item ion-icon {
