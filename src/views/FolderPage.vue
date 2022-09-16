@@ -9,7 +9,7 @@
       </ion-toolbar>
 
       <ion-searchbar placeholder="Rechercher un boîtier, un véhicule..."></ion-searchbar>
-
+      <btn-header></btn-header>
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -44,6 +44,7 @@ import {
 } from '@ionic/vue';
 import OpenLayersMap from '../components/map/OpenLayersMap.vue';
 import ProgressBar from "@/components/figmaExtractions/progressBar.vue";
+import BtnHeader from "@/components/figmaExtractions/btnHeader.vue";
 
 export default defineComponent({
   name: 'FolderPage',
@@ -80,6 +81,7 @@ export default defineComponent({
     }
   },
   components: {
+    BtnHeader,
     IonSearchbar,
     ProgressBar,
     IonButtons,
