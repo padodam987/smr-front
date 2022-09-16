@@ -15,7 +15,7 @@
     <ion-content :fullscreen="true">
 
       <div id="container">
-        <progress-bar :pourcent="progress" :text="`${Math.floor(this.progress * 100)}%`" :color="color"></progress-bar>
+        <progress-bar :pourcent="progress" :text="`${Math.floor(this.progress * 100)}%`" :color="color" :border-color="color"></progress-bar>
         <ion-button v-on:click="convertColorToClass" color="success">Vert</ion-button>
         <ion-button v-on:click="convertColorToClass" color="warning">Jaune</ion-button>
         <ion-button v-on:click="convertColorToClass" color="danger">Rouge</ion-button>
@@ -43,8 +43,8 @@ import {
   IonButton
 } from '@ionic/vue';
 import OpenLayersMap from '../components/map/OpenLayersMap.vue';
-import ProgressBar from "@/components/figmaExtractions/progressBar.vue";
-import BtnHeader from "@/components/figmaExtractions/btnHeader.vue";
+import ProgressBar from "@/components/progressBar.vue";
+import BtnHeader from "@/components/btnHeader.vue";
 
 export default defineComponent({
   name: 'FolderPage',

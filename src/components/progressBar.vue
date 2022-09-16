@@ -1,11 +1,9 @@
 <template>
   <div class="progress-bar-container">
-    <div class="progress-bar-contour">
-      <ion-progress-bar :value="pourcent" :color="color" class="progress-bar-content"></ion-progress-bar>
+    <div :class="`progress-bar-contour ${borderColor}`">
+      <ion-progress-bar :color="color" :value="pourcent" class="progress-bar-content"></ion-progress-bar>
     </div>
     <div :class="color">{{ text }}</div>
-    <div class="progress" style="transform: scaleX(0.4);"></div>
-
   </div>
 </template>
 
@@ -13,18 +11,22 @@
 import {IonProgressBar} from "@ionic/vue";
 import {defineComponent} from "vue";
 
-export default {
+export default defineComponent({
 
   name: "progressBar",
   props: {
     pourcent: Number,
     text: String,
     color: String,
+    borderColor: {
+      type: String,
+      default: "defaultBorderColor",
+    },
   },
   components: {
     IonProgressBar
   }
-}
+})
 </script>
 
 <style scoped>
@@ -38,7 +40,7 @@ export default {
   width: 112px;
   height: 18px;
   box-sizing: border-box;
-  border: 1px solid #C9C7C7;
+  border: 1px solid;
   border-radius: 9px;
 }
 
@@ -61,6 +63,10 @@ export default {
 
 .danger {
   color: var(--ion-color-danger);
+}
+
+.defaultBorderColor {
+  border-color: #C9C7C7;
 }
 
 </style>

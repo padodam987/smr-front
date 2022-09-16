@@ -12,7 +12,7 @@
 
 <script>
 import {IonButton, IonIcon} from "@ionic/vue";
-import Charged from "../../images/charged.svg"
+import Charged from "../images/charged.svg"
 
 export default {
   name: "btnHeader",
