@@ -1,6 +1,6 @@
 <template>
   <ion-col class="filter-col">
-    <div class="filter-btn" v-on:click="filter" :style="`background: ${selected?`linear-gradient(180deg, ${color}CC, ${color})`:'white'};`">
+    <div class="filter-btn" v-on:click="filter" :style="`background: ${selected?`linear-gradient(180deg, ${color}AA, ${color})`:'white'};`">
       <ion-row class="ion-justify-content-center filter-icon-row">
         <ion-icon :icon="icon" class="filter-icon-large" :style="`color:${selected?'white':color};` "></ion-icon>
       </ion-row>

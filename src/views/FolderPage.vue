@@ -14,11 +14,18 @@
 
     <ion-content :fullscreen="true">
       <ion-row>
-          <btn-header v-for="filter in filters" v-on:click="testFunction" :color="filter.color" :value="filter.value" :text="filter.text" :icon="filter.icon" :key="filter.key"></btn-header>
+        <btn-header v-for="filter in filters"
+                    v-on:click="testFunction"
+                    :color="filter.color"
+                    :value="filter.value"
+                    :text="filter.text"
+                    :icon="filter.icon"
+                    :key="filter.key"></btn-header>
       </ion-row>
 
       <div id="container">
-        <progress-bar :pourcent="progress" :text="`${Math.floor(this.progress * 100)}%`" :color="color" :border-color="color"></progress-bar>
+        <progress-bar :pourcent="progress" :text="`${Math.floor(this.progress * 100)}%`" :color="color"
+                      :border-color="color"></progress-bar>
         <ion-button v-on:click="convertColorToClass" color="success">Vert</ion-button>
         <ion-button v-on:click="convertColorToClass" color="warning">Jaune</ion-button>
         <ion-button v-on:click="convertColorToClass" color="danger">Rouge</ion-button>
@@ -44,7 +51,7 @@ import {
   IonTitle,
   IonToolbar,
   IonButton,
-    IonRow,
+  IonRow,
 } from '@ionic/vue';
 import ProgressBar from "@/components/progressBar.vue";
 import BtnHeader from "@/components/btnHeader.vue";
@@ -56,32 +63,32 @@ import ToCharge from "../images/toCharge.svg";
 
 const filters = [
   {
-    key:0,
-    color:"#4A90E2",
-    value:"5",
-    text:"véhicules à charger",
-    icon:ToCharge,
+    key: 0,
+    color: "#4A90E2",
+    value: "5",
+    text: "véhicules à charger",
+    icon: ToCharge,
   },
   {
-    key:1,
-    color:"#D0021B",
-    value:"4",
-    text:"erreurs identifiées",
-    icon:Error,
+    key: 1,
+    color: "#D0021B",
+    value: "4",
+    text: "erreurs identifiées",
+    icon: Error,
   },
   {
-    key:2,
-    color:"#F5A623",
-    value:"3",
-    text:"chargements en cours",
-    icon:Charging,
+    key: 2,
+    color: "#F5A623",
+    value: "3",
+    text: "chargements en cours",
+    icon: Charging,
   },
   {
-    key:3,
-    color:"#589318",
-    value:"6",
-    text:"véhicules chargés",
-    icon:Charged,
+    key: 3,
+    color: "#589318",
+    value: "6",
+    text: "véhicules chargés",
+    icon: Charged,
   },
 ]
 
@@ -108,8 +115,8 @@ export default defineComponent({
     convertColorToClass: function (btn: any) {
       this.color = btn.target.color
     },
-    testFunction: function (key: any){
-      console.log(key.target.key)
+    testFunction: function (evt: any) {
+      console.log(evt.target.key)
     }
   },
   watch: {
