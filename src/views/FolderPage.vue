@@ -15,7 +15,7 @@
     <ion-content :fullscreen="true">
       <ion-row>
         <btn-header v-for="filter in filters"
-                    v-on:click="testFunction"
+                    @btnSelect="handleChangeSelected"
                     :color="filter.color"
                     :value="filter.value"
                     :text="filter.text"
@@ -34,13 +34,16 @@
         <ion-button @click="addProgression"> +</ion-button>
 
         <strong class="capitalize">{{ $route.params.id }} {{ progress }}</strong>
+{{state}}
+<!--        <vehicule-list></vehicule-list>-->
+
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 import {
   IonSearchbar,
   IonButtons,
@@ -60,14 +63,25 @@ import Charging from "../images/charging.svg";
 import Error from "../images/errorToCharge.svg";
 import ToCharge from "../images/toCharge.svg";
 
+interface FilterButton {
+  key: number,
+  color: string,
+  value: string,
+  text: string,
+  icon: string,
+  state: string,
+  enabled: boolean
+}
 
-const filters = [
+const filters:Array<FilterButton> = [
   {
     key: 0,
     color: "#4A90E2",
     value: "5",
     text: "véhicules à charger",
     icon: ToCharge,
+    state:"TOCHARGE",
+    enabled: false,
   },
   {
     key: 1,
@@ -75,6 +89,8 @@ const filters = [
     value: "4",
     text: "erreurs identifiées",
     icon: Error,
+    state:"ERROR",
+    enabled: false,
   },
   {
     key: 2,
@@ -82,6 +98,8 @@ const filters = [
     value: "3",
     text: "chargements en cours",
     icon: Charging,
+    state:"CHARGING",
+    enabled: false,
   },
   {
     key: 3,
@@ -89,7 +107,94 @@ const filters = [
     value: "6",
     text: "véhicules chargés",
     icon: Charged,
+    state:"CHARGED",
+    enabled: false,
   },
+]
+
+interface Vehicule {
+  image: string,
+  number: number,
+  name: string,
+  location: string,
+  bat_number: number,
+  state: string,
+  pourcent?: number
+}
+
+const listeAFiltrer: Array<Vehicule> = [
+  {
+    image: '../images/image1',
+    number: 69111359,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701159,
+    state: "CHARGED",
+    pourcent: 100
+  },
+  {
+    image: '../images/image2',
+    number: 69111959,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701559,
+    state: "CHARGING",
+    pourcent: 5,
+  },
+  {
+    image: '../images/image1',
+    number: 69111359,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701159,
+    state: "TOCHARGE",
+    pourcent: 20,
+  },
+  {
+    image: '../images/image1',
+    number: 69111359,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701159,
+    state: "ERROR",
+    pourcent: undefined,
+  },
+  {
+    image: '../images/image1',
+    number: 69111359,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701159,
+    state: "CHARGED",
+    pourcent: 100,
+  },
+  {
+    image: '../images/image1',
+    number: 69111359,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701159,
+    state: "ERROR",
+    pourcent: undefined,
+  },
+  {
+    image: '../images/image2',
+    number: 69111959,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701559,
+    state: "CHARGING",
+    pourcent: 5,
+  },
+  {
+    image: '../images/image1',
+    number: 69111359,
+    name: "BUFFALO",
+    location: "BAT512",
+    bat_number: 5701159,
+    state: "TOCHARGE",
+    pourcent: 20,
+  }
 ]
 
 export default defineComponent({
@@ -98,6 +203,7 @@ export default defineComponent({
     return {
       filters,
       mapShown: true,
+      listeAFiltrer,
       progress: 0.2,
       color: "warning",
     }
@@ -115,9 +221,9 @@ export default defineComponent({
     convertColorToClass: function (btn: any) {
       this.color = btn.target.color
     },
-    testFunction: function (evt: any) {
-      console.log(evt.target.key)
-    }
+    handleChangeSelected: function (idBtn: number, selected: boolean) {
+      this.filters[this.filters.findIndex(s => s.key === idBtn)].enabled = selected
+    },
   },
   watch: {
     $route(newRoute) {
@@ -127,7 +233,13 @@ export default defineComponent({
     },
     mapShown(newShown) {
       console.log('shown', newShown)
-    }
+    },
+    filters:{
+      handler: function (val){
+        console.log(val.filter((s:any) => s.enabled))
+      },
+      deep:true,
+    },
   },
   components: {
     BtnHeader,

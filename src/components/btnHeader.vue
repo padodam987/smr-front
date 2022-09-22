@@ -32,9 +32,11 @@ export default {
     IonRow,
     IonCol,
   },
+  emits: ['btnSelect'],
   methods: {
     filter: function () {
       this.selected = !this.selected
+      this.$.emit('btnSelect', this.$.vnode.key, this.selected)
     }
   },
   props:{
