@@ -62,6 +62,7 @@ import Charged from "../images/charged.svg";
 import Charging from "../images/charging.svg";
 import Error from "../images/errorToCharge.svg";
 import ToCharge from "../images/toCharge.svg";
+import _ from 'lodash';
 
 interface FilterButton {
   key: number,
@@ -187,13 +188,13 @@ const listeAFiltrer: Array<Vehicule> = [
     pourcent: 5,
   },
   {
-    image: '../images/image1',
-    number: 69111359,
+    image: '../images/image2',
+    number: 69116759,
     name: "BUFFALO",
     location: "BAT512",
-    bat_number: 5701159,
+    bat_number: 5701789,
     state: "TOCHARGE",
-    pourcent: 20,
+    pourcent: 67,
   }
 ]
 
@@ -236,9 +237,26 @@ export default defineComponent({
     },
     filters:{
       handler: function (val){
-        console.log(val.filter((s:any) => s.enabled))
+
+        // console.log(_.filter(listeAFiltrer, val.filter((s:FilterButton) => s.enabled),
+        //     function(x:any,y:any){
+        //   return x.state === y.state
+        // }))
+        const selectedFilters = val.filter((filter:FilterButton) => filter.enabled)
+
+        // const listeAAfficher = selectedFilters.length !== 0
+        //     ? listeAFiltrer.filter((vehicule:Vehicule) => selectedFilters.some((y:FilterButton) => y.state === vehicule.state))
+        //     : listeAFiltrer
+        if(selectedFilters.length !== 0)
+          this.listeAFiltrer = listeAFiltrer.filter((vehicule:Vehicule) => selectedFilters.some((y:FilterButton) => y.state === vehicule.state))
       },
       deep:true,
+    },
+    listeAFiltrer:{
+      handler: function(newListe){
+        console.log(newListe)
+      },
+      deep: true,
     },
   },
   components: {
